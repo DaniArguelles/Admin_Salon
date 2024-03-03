@@ -34,6 +34,7 @@
             this.btnEliminarC = new System.Windows.Forms.Button();
             this.btnNuevoC = new System.Windows.Forms.Button();
             this.dtgClientes = new System.Windows.Forms.DataGridView();
+            this.btnCitaC = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -59,6 +60,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.btnCitaC);
             this.splitContainer1.Panel1.Controls.Add(this.btnModificarC);
             this.splitContainer1.Panel1.Controls.Add(this.btnEliminarC);
             this.splitContainer1.Panel1.Controls.Add(this.btnNuevoC);
@@ -110,6 +112,16 @@
             this.dtgClientes.TabIndex = 0;
             this.dtgClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgClientes_CellContentClick);
             // 
+            // btnCitaC
+            // 
+            this.btnCitaC.Location = new System.Drawing.Point(46, 237);
+            this.btnCitaC.Name = "btnCitaC";
+            this.btnCitaC.Size = new System.Drawing.Size(75, 23);
+            this.btnCitaC.TabIndex = 4;
+            this.btnCitaC.Text = "Agendar";
+            this.btnCitaC.UseVisualStyleBackColor = true;
+            this.btnCitaC.Click += new System.EventHandler(this.btnCitaC_Click);
+            // 
             // FrmClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -138,5 +150,6 @@
         private System.Windows.Forms.Button btnEliminarC;
         private System.Windows.Forms.Button btnNuevoC;
         private System.Windows.Forms.DataGridView dtgClientes;
+        private System.Windows.Forms.Button btnCitaC;
     }
 }

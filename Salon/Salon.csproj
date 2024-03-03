@@ -55,6 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmAgendarC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAgendarC.Designer.cs">
+      <DependentUpon>FrmAgendarC.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmAgregarC.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +141,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrmAgendarC.resx">
+      <DependentUpon>FrmAgendarC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmAgregarC.resx">
       <DependentUpon>FrmAgregarC.cs</DependentUpon>
     </EmbeddedResource>

@@ -19,3 +19,4 @@ C:\Users\Daniel\OneDrive - Universidad Metropolitana de Monterrey\Proyectos\Salo
 C:\Users\Daniel\OneDrive - Universidad Metropolitana de Monterrey\Proyectos\Salon\obj\Debug\Salon.FrmAgregarP.resources
 C:\Users\Daniel\OneDrive - Universidad Metropolitana de Monterrey\Proyectos\Salon\obj\Debug\Salon.FrmAgregarC.resources
 C:\Users\Daniel\OneDrive - Universidad Metropolitana de Monterrey\Proyectos\Salon\obj\Debug\Salon.FrmClientes.resources
+C:\Users\Daniel\OneDrive - Universidad Metropolitana de Monterrey\Proyectos\Salon\obj\Debug\Salon.FrmAgendarC.resources

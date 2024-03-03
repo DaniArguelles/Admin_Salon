@@ -81,5 +81,12 @@ namespace Salon
         {
 
         }
+
+        private void btnCitaC_Click(object sender, EventArgs e)
+        {
+            FrmAgendarC frm = new FrmAgendarC();
+            frm.ShowDialog();
+
+        }
     }
 }
