@@ -29,6 +29,7 @@ namespace Salon
             {
                 var hola =db.Mostrar_Citas_Nuevo(null);
                 dtgMostrarCitas.DataSource = hola.ToList();
+
             }
         }
     }

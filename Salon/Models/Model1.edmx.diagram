@@ -12,6 +12,7 @@
         <EntityTypeShape EntityType="SalonModel.Clientes" Width="1.5" PointX="4" PointY="7" />
         <AssociationConnector Association="SalonModel.fk_id_servicio" />
         <AssociationConnector Association="SalonModel.fk_cliente" />
+        <EntityTypeShape EntityType="SalonModel.Horas" Width="1.5" PointX="0.75" PointY="3.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

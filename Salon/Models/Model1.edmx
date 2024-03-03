@@ -27,6 +27,15 @@
           <Property Name="Correo" Type="varchar" MaxLength="50" />
           <Property Name="Telefono" Type="varchar" MaxLength="20" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'Salon.dbo.Horas' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Horas">
+          <Key>
+            <PropertyRef Name="id_hora" />
+          </Key>
+          <Property Name="id_hora" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hora" Type="time" Precision="0" />
+        </EntityType>
         <EntityType Name="Productos">
           <Key>
             <PropertyRef Name="Id" />
@@ -79,6 +88,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Agregar_Cita" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="cliente" Type="varchar" Mode="In" />
+          <Parameter Name="servicio" Type="varchar" Mode="In" />
+          <Parameter Name="fecha" Type="date" Mode="In" />
+          <Parameter Name="Hora" Type="time" Mode="In" />
+          <Parameter Name="HoraFin" Type="time" Mode="In" />
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="id_cliente" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Hora" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fecha" Type="date" Mode="In" />
+        </Function>
         <Function Name="Mostrar_Citas_Nuevo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Fecha" Type="date" Mode="In" />
         </Function>
@@ -88,6 +109,12 @@
           <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Servicios" EntityType="Self.Servicios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Horas" EntityType="Self.Horas" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Horas].[id_hora] AS [id_hora], 
+    [Horas].[hora] AS [hora]
+    FROM [dbo].[Horas] AS [Horas]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="fk_cliente" Association="Self.fk_cliente">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="citas" EntitySet="citas" />
@@ -120,6 +147,19 @@
           </AssociationSet>
           <FunctionImport Name="Mostrar_Citas_Nuevo" ReturnType="Collection(SalonModel.Mostrar_Citas_Nuevo_Result)">
           <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Agregar_Cita">
+            <Parameter Name="cliente" Mode="In" Type="String" />
+            <Parameter Name="servicio" Mode="In" Type="String" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="Hora" Mode="In" Type="Time" />
+            <Parameter Name="HoraFin" Mode="In" Type="Time" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id_cliente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Horas" EntityType="SalonModel.Horas" />
+          <FunctionImport Name="Hora" ReturnType="Collection(Time)">
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="Usuarios">
@@ -217,6 +257,13 @@
           <Property Type="Time" Name="HoraFin" Nullable="true" />
           <Property Type="String" Name="Estatus" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <EntityType Name="Horas">
+          <Key>
+            <PropertyRef Name="id_hora" />
+          </Key>
+          <Property Name="id_hora" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hora" Type="Time" Precision="0" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -291,6 +338,16 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Agregar_Cita" FunctionName="SalonModel.Store.Agregar_Cita" />
+          <EntitySetMapping Name="Horas">
+            <EntityTypeMapping TypeName="SalonModel.Horas">
+              <MappingFragment StoreEntitySet="Horas">
+                <ScalarProperty Name="hora" ColumnName="hora" />
+                <ScalarProperty Name="id_hora" ColumnName="id_hora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Hora" FunctionName="SalonModel.Store.Hora" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

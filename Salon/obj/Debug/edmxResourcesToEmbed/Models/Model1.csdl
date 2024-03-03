@@ -20,6 +20,19 @@
     <FunctionImport Name="Mostrar_Citas_Nuevo" ReturnType="Collection(SalonModel.Mostrar_Citas_Nuevo_Result)">
       <Parameter Name="Fecha" Mode="In" Type="DateTime" />
     </FunctionImport>
+    <FunctionImport Name="Agregar_Cita">
+      <Parameter Name="cliente" Mode="In" Type="String" />
+      <Parameter Name="servicio" Mode="In" Type="String" />
+      <Parameter Name="fecha" Mode="In" Type="DateTime" />
+      <Parameter Name="Hora" Mode="In" Type="Time" />
+      <Parameter Name="HoraFin" Mode="In" Type="Time" />
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="id_cliente" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Horas" EntityType="SalonModel.Horas" />
+    <FunctionImport Name="Hora" ReturnType="Collection(Time)">
+      <Parameter Name="fecha" Mode="In" Type="DateTime" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="Usuarios">
     <Key>
@@ -116,4 +129,11 @@
     <Property Type="Time" Name="HoraFin" Nullable="true" />
     <Property Type="String" Name="Estatus" Nullable="true" MaxLength="50" />
   </ComplexType>
+  <EntityType Name="Horas">
+    <Key>
+      <PropertyRef Name="id_hora" />
+    </Key>
+    <Property Name="id_hora" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="hora" Type="Time" Precision="0" />
+  </EntityType>
 </Schema>

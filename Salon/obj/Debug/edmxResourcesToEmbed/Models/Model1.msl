@@ -69,5 +69,15 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Agregar_Cita" FunctionName="SalonModel.Store.Agregar_Cita" />
+    <EntitySetMapping Name="Horas">
+      <EntityTypeMapping TypeName="SalonModel.Horas">
+        <MappingFragment StoreEntitySet="Horas">
+          <ScalarProperty Name="hora" ColumnName="hora" />
+          <ScalarProperty Name="id_hora" ColumnName="id_hora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Hora" FunctionName="SalonModel.Store.Hora" />
   </EntityContainerMapping>
 </Mapping>

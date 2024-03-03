@@ -31,7 +31,7 @@
             this.btnClientes = new System.Windows.Forms.Button();
             this.btnProductos = new System.Windows.Forms.Button();
             this.btnCitas = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnServicios = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnClientes
@@ -64,21 +64,21 @@
             this.btnCitas.UseVisualStyleBackColor = true;
             this.btnCitas.Click += new System.EventHandler(this.btnCitas_Click);
             // 
-            // button4
+            // btnServicios
             // 
-            this.button4.Location = new System.Drawing.Point(413, 232);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(179, 77);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnServicios.Location = new System.Drawing.Point(413, 232);
+            this.btnServicios.Name = "btnServicios";
+            this.btnServicios.Size = new System.Drawing.Size(179, 77);
+            this.btnServicios.TabIndex = 3;
+            this.btnServicios.Text = "Servicios";
+            this.btnServicios.UseVisualStyleBackColor = true;
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.btnServicios);
             this.Controls.Add(this.btnCitas);
             this.Controls.Add(this.btnProductos);
             this.Controls.Add(this.btnClientes);
@@ -93,6 +93,6 @@
         private System.Windows.Forms.Button btnClientes;
         private System.Windows.Forms.Button btnProductos;
         private System.Windows.Forms.Button btnCitas;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnServicios;
     }
 }

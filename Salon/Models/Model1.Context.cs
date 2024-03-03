@@ -32,6 +32,7 @@ namespace Salon.Models
         public virtual DbSet<Servicios> Servicios { get; set; }
         public virtual DbSet<citas> citas { get; set; }
         public virtual DbSet<Clientes> Clientes { get; set; }
+        public virtual DbSet<Horas> Horas { get; set; }
     
         public virtual ObjectResult<Mostrar_Citas_Result> Mostrar_Citas(Nullable<System.DateTime> fecha)
         {
@@ -49,6 +50,48 @@ namespace Salon.Models
                 new ObjectParameter("Fecha", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Mostrar_Citas_Nuevo_Result>("Mostrar_Citas_Nuevo", fechaParameter);
+        }
+    
+        public virtual int Agregar_Cita(string cliente, string servicio, Nullable<System.DateTime> fecha, Nullable<System.TimeSpan> hora, Nullable<System.TimeSpan> horaFin, Nullable<int> id, Nullable<int> id_cliente)
+        {
+            var clienteParameter = cliente != null ?
+                new ObjectParameter("cliente", cliente) :
+                new ObjectParameter("cliente", typeof(string));
+    
+            var servicioParameter = servicio != null ?
+                new ObjectParameter("servicio", servicio) :
+                new ObjectParameter("servicio", typeof(string));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            var horaParameter = hora.HasValue ?
+                new ObjectParameter("Hora", hora) :
+                new ObjectParameter("Hora", typeof(System.TimeSpan));
+    
+            var horaFinParameter = horaFin.HasValue ?
+                new ObjectParameter("HoraFin", horaFin) :
+                new ObjectParameter("HoraFin", typeof(System.TimeSpan));
+    
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var id_clienteParameter = id_cliente.HasValue ?
+                new ObjectParameter("id_cliente", id_cliente) :
+                new ObjectParameter("id_cliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Agregar_Cita", clienteParameter, servicioParameter, fechaParameter, horaParameter, horaFinParameter, idParameter, id_clienteParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<System.TimeSpan>> Hora(Nullable<System.DateTime> fecha)
+        {
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.TimeSpan>>("Hora", fechaParameter);
         }
     }
 }

@@ -16,6 +16,8 @@ namespace Salon
         public FrmAgendarC()
         {
             InitializeComponent();
+
+            mcAgregarC.DateChanged += mcAgregarC_DateChanged;
         }
 
         private void FrmAgendarC_Load(object sender, EventArgs e)
@@ -46,7 +48,53 @@ namespace Salon
 
             }
 
+            /*using (SalonEntities db = new SalonEntities()) 
+            {
+
+                var hora = db.Hora(mcAgregarC.SelectionEnd);
+                
+                cmbHoraAC.DataSource = hora;
+            }
+            */
+
         }
 
+        private void mcAgregarC_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            // Llamas al método para actualizar las horas según la nueva fecha del MonthCalendar
+            ActualizarHoras();
+        }
+
+        private void ActualizarHoras()
+        {
+            using (SalonEntities db = new SalonEntities())
+            {
+                // Obtienes la fecha seleccionada del MonthCalendar
+                var fechaSeleccionada = mcAgregarC.SelectionEnd;
+
+                // Llamas a la función en tu base de datos para obtener las horas
+                var horas = db.Hora(fechaSeleccionada).ToList();
+
+                // Asignas las horas al DataSource del ComboBox
+                cmbHoraAC.DataSource = horas;
+            }
+        }
+
+        private void btnGuardarAC_Click(object sender, EventArgs e)
+        {
+            using (SalonEntities db = new SalonEntities()) {
+
+
+                var horaCita = TimeSpan.Parse(cmbHoraAC.Text);
+
+                var fechaCita = mcAgregarC.SelectionStart; 
+
+                var guardar = db.Agregar_Cita(cmbCliente.Text, cmbServicio.Text,fechaCita,horaCita,null,null,null);                
+            }
+
+            MessageBox.Show("Cita agendada");
+            this.Close();
+            
+        }
     }
 }
