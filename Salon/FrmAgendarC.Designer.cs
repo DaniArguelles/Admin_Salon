@@ -59,9 +59,9 @@
             // 
             // txtHora
             // 
-            this.txtHora.Location = new System.Drawing.Point(175, 293);
+            this.txtHora.Location = new System.Drawing.Point(53, 294);
             this.txtHora.Name = "txtHora";
-            this.txtHora.Size = new System.Drawing.Size(100, 20);
+            this.txtHora.Size = new System.Drawing.Size(121, 20);
             this.txtHora.TabIndex = 3;
             // 
             // FrmAgendarC

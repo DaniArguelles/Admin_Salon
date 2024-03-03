@@ -22,8 +22,6 @@ namespace Salon
         {
 
             Refrescar();
-
-
         }
 
         private void Refrescar()
@@ -34,9 +32,18 @@ namespace Salon
                                select d).ToList();
 
                 cmbCliente.DataSource = clientes;
-
                 cmbCliente.DisplayMember = "Nombre";
                 
+            }
+
+            using (SalonEntities db = new SalonEntities())
+            {
+                var servicios = (from d in db.Servicios
+                                select d).ToList();
+
+                cmbServicio.DataSource = servicios;
+                cmbServicio.DisplayMember = "Servicio";
+
             }
 
         }
