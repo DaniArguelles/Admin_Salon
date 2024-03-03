@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SalonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="SalonEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Usuarios" EntityType="SalonModel.Usuarios" />
+    <EntitySet Name="Productos" EntityType="SalonModel.Productos" />
+    <EntitySet Name="Servicios" EntityType="SalonModel.Servicios" />
+    <FunctionImport Name="Mostrar_Citas" ReturnType="Collection(SalonModel.Mostrar_Citas_Result)">
+      <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="citas" EntityType="SalonModel.citas" />
+    <EntitySet Name="Clientes" EntityType="SalonModel.Clientes" />
+    <AssociationSet Name="fk_id_servicio" Association="SalonModel.fk_id_servicio">
+      <End Role="Servicios" EntitySet="Servicios" />
+      <End Role="citas" EntitySet="citas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_cliente" Association="SalonModel.fk_cliente">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="citas" EntitySet="citas" />
+    </AssociationSet>
+    <FunctionImport Name="Mostrar_Citas_Nuevo" ReturnType="Collection(SalonModel.Mostrar_Citas_Nuevo_Result)">
+      <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="contra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Productos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Producto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Unidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Cantidad" Type="Int32" />
+    <Property Name="Precio" Type="Decimal" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="Servicios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Servicio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Precio" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="duracion" Type="Time" Precision="0" />
+    <NavigationProperty Name="citas" Relationship="SalonModel.fk_id_servicio" FromRole="Servicios" ToRole="citas" />
+  </EntityType>
+  <ComplexType Name="Mostrar_Citas_Result">
+    <Property Type="Int32" Name="id_citas" Nullable="false" />
+    <Property Type="String" Name="servicio" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="fecha" Nullable="true" />
+    <Property Type="Time" Name="HoraInicio" Nullable="true" />
+    <Property Type="Time" Name="HoraFin" Nullable="true" />
+    <Property Type="String" Name="Estatus" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="citas">
+    <Key>
+      <PropertyRef Name="Id_Citas" />
+    </Key>
+    <Property Name="Id_Citas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cliente" Type="Int32" />
+    <Property Name="Servicio" Type="Int32" />
+    <Property Name="Fecha" Type="DateTime" Precision="0" />
+    <Property Name="HoraInicio" Type="Time" Precision="0" />
+    <Property Name="HoraFin" Type="Time" Precision="0" />
+    <Property Name="Estatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Servicios" Relationship="SalonModel.fk_id_servicio" FromRole="citas" ToRole="Servicios" />
+    <NavigationProperty Name="Clientes" Relationship="SalonModel.fk_cliente" FromRole="citas" ToRole="Clientes" />
+  </EntityType>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="id_Cliente" />
+    </Key>
+    <Property Name="id_Cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="citas" Relationship="SalonModel.fk_cliente" FromRole="Clientes" ToRole="citas" />
+  </EntityType>
+  <Association Name="fk_id_servicio">
+    <End Type="SalonModel.Servicios" Role="Servicios" Multiplicity="0..1" />
+    <End Type="SalonModel.citas" Role="citas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Servicios">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="citas">
+        <PropertyRef Name="Servicio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_cliente">
+    <End Type="SalonModel.Clientes" Role="Clientes" Multiplicity="0..1" />
+    <End Type="SalonModel.citas" Role="citas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="id_Cliente" />
+      </Principal>
+      <Dependent Role="citas">
+        <PropertyRef Name="Cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="Mostrar_Citas_Nuevo_Result">
+    <Property Type="Int32" Name="id_citas" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="servicio" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="fecha" Nullable="true" />
+    <Property Type="Time" Name="HoraInicio" Nullable="true" />
+    <Property Type="Time" Name="HoraFin" Nullable="true" />
+    <Property Type="String" Name="Estatus" Nullable="true" MaxLength="50" />
+  </ComplexType>
+</Schema>
